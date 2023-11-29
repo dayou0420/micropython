@@ -57,7 +57,7 @@ print('listening on', addr)
 
 # Listen for connections, serve client
 while True:
-    try:       
+    try:
         cl, addr = s.accept()
         print('client connected from', addr)
         request = cl.recv(1024)

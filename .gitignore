@@ -47,5 +47,5 @@ temp/
 *.scssc
 
 # micropython
-mylib/env.py
+*/env.py
 .micropico
