@@ -58,7 +58,7 @@ while True:
     # Play frog song
     play_frog_song()
 
-    sleep(3)
+    sleep(1)
 
     # Set the duty cycle of the buzzer to 0 (minimum) to turn it off
     buzzer.duty_u16(0)
