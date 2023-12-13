@@ -1,47 +1,32 @@
 from machine import Pin, PWM
 from time import sleep
 
-led_1 = Pin(0, Pin.OUT)
-led_2 = Pin(1, Pin.OUT)
-led_3 = Pin(2, Pin.OUT)
-led_4 = Pin(3, Pin.OUT)
-led_5 = Pin(4, Pin.OUT)
-led_6 = Pin(5, Pin.OUT)
-led_7 = Pin(6, Pin.OUT)
+# Define pins for LEDs
+led_pins = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+leds = [Pin(pin, Pin.OUT) for pin in led_pins]
 
-buzzer = PWM(Pin(15))
-buzzer.freq(500)
-buzzer.duty_u16(200)
-sleep(1)
-buzzer.duty_u16(0)
+# Define pin for the buzzer
+buzzer = PWM(Pin(16))
+melody = [262, 294, 330, 349, 392, 440, 494, 523]
 
-for i in range(5):
-    led_1.value(1)
+def play_song():
+    for note in melody:
+        buzzer.freq(note)
+        buzzer.duty_u16(500)
+        sleep(0.5)
+        buzzer.duty_u16(0)
+        sleep(0.1)
 
-    sleep(1)
-    led_1.value(0)
-    led_2.value(1)
+def light_leds():
+    for led in leds:
+        led.value(1)
+        sleep(1)
+        led.value(0)
 
-    sleep(1)
-    led_2.value(0)
-    led_3.value(1)
+def main():
+    for _ in range(5):
+        light_leds()
+        play_song()
 
-    sleep(1)
-    led_3.value(0)
-    led_4.value(1)
-
-    sleep(1)
-    led_4.value(0)
-    led_5.value(1)
-
-    sleep(1)
-    led_5.value(0)
-    led_6.value(1)
-
-    sleep(1)
-    led_6.value(0)
-    led_7.value(1)
-
-    sleep(1)
-    led_7.value(0)
-    buzzer.duty_u16(0)
+if __name__ == "__main__":
+    main()
